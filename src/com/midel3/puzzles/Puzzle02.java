@@ -21,14 +21,9 @@ public class Puzzle02 extends Puzzle {
         }
     }
 
-    public Puzzle02() {
-
-    }
-
-    @Override
-    public void solve() {
+    public ArrayList<Integer> readInput(){
         char[] a = new char[4000];
-        ArrayList<Integer> finalArray = new ArrayList<Integer>();
+        ArrayList<Integer> finalArray = new ArrayList<>();
         try {
             reader.read(a);
             StringBuilder sb  = new StringBuilder();
@@ -51,13 +46,16 @@ public class Puzzle02 extends Puzzle {
                 }
             }
             reader.close();
-            // System.out.println(sb.toString());
-            for (int i: finalArray ) {
-                System.out.println(i);
-            }
-
         } catch (IOException e){
             System.out.println("IOException");
+        }
+        return finalArray;
+    }
+
+    @Override
+    public void solve() {
+        for (int i: this.readInput()) {
+            System.out.println(i);
         }
     }
 }
