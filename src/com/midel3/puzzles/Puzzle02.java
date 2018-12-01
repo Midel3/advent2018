@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class Puzzle02 extends Puzzle {
 
+
     File file = new File("C:\\Users\\Mitchel\\Desktop\\input.txt");
     FileReader reader;
 
@@ -20,6 +21,7 @@ public class Puzzle02 extends Puzzle {
             e.printStackTrace();
         }
     }
+
 
     public ArrayList<Integer> readInput(){
         char[] a = new char[4000];
@@ -40,7 +42,7 @@ public class Puzzle02 extends Puzzle {
                         }
 
                     } catch (NumberFormatException e) {
-                        System.out.println(e);
+                        // System.out.println(e);
                     }
                     sb = new StringBuilder();
                 }
@@ -52,10 +54,34 @@ public class Puzzle02 extends Puzzle {
         return finalArray;
     }
 
+    public int getDoubleFreq(ArrayList<Integer> input){
+        Integer freq = 0;
+        ArrayList<Integer> tempStack = new ArrayList<>();
+        tempStack.add(freq);
+        int i = 0;
+        do {
+            freq += input.get(i);
+            if (tempStack.contains(freq)){
+                return freq;
+            } else {
+                tempStack.add(freq);
+                i++;
+            }
+            if (i >= input.size()){
+                i = 0;
+            }
+        } while (true);
+    }
+
     @Override
     public void solve() {
-        for (int i: this.readInput()) {
-            System.out.println(i);
-        }
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(-3);
+        list.add(1);
+        list.add(1);
+        list.add(4);
+        System.out.println(this.getDoubleFreq(this.readInput()));
+        // System.out.println(this.getDoubleFreq(this.readInput()));
     }
 }
