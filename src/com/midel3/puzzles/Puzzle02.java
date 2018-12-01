@@ -75,13 +75,6 @@ public class Puzzle02 extends Puzzle {
 
     @Override
     public void solve() {
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(-3);
-        list.add(1);
-        list.add(1);
-        list.add(4);
         System.out.println(this.getDoubleFreq(this.readInput()));
-        // System.out.println(this.getDoubleFreq(this.readInput()));
     }
 }
