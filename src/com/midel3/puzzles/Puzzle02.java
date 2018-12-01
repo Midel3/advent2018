@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Puzzle02 extends Puzzle {
 
@@ -27,16 +28,36 @@ public class Puzzle02 extends Puzzle {
     @Override
     public void solve() {
         char[] a = new char[4000];
+        ArrayList<Integer> finalArray = new ArrayList<Integer>();
         try {
-            int charInt = reader.read(a);
-            for(char c: a){
-                System.out.print(c);
+            reader.read(a);
+            StringBuilder sb  = new StringBuilder();
+            for(int i = 0; i < a.length; i++){
+                char c = a[i];
+                if ((c >= '0' && c <= '9') || c == '-') {
+                    sb.append(c);
+                } else {
+                    try {
+                        if (Integer.parseInt(sb.toString()) == 0) {
+                            break;
+                        } else {
+                            finalArray.add(Integer.parseInt(sb.toString()));
+                        }
+
+                    } catch (NumberFormatException e) {
+                        System.out.println(e);
+                    }
+                    sb = new StringBuilder();
+                }
+            }
+            reader.close();
+            // System.out.println(sb.toString());
+            for (int i: finalArray ) {
+                System.out.println(i);
             }
 
         } catch (IOException e){
             System.out.println("IOException");
-        } /*catch (FileNotFoundException e){
-            System.out.println("file not found");
-        }*/
+        }
     }
 }
