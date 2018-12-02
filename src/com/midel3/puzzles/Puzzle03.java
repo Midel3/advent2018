@@ -73,17 +73,40 @@ public class Puzzle03 extends Puzzle {
         return a*b;
     }
 
+    public int findNotCommonCount(String s1, String s2) {
+        int commonCount = 0;
+        for (int i = 0; i < s1.length(); i++) {
+            if (s1.charAt(i) == s2.charAt(i)) {
+                commonCount++;
+            } else {
+                continue;
+            }
+        }
+        return s1.length() - commonCount;
+    }
+
+    public String checkOneCommon(ArrayList<String> list) {
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.size(); j++) {
+                if (list.get(i).length() == 0 || list.get(j).length() == 0) {
+                    continue;
+                }
+                if (i == j) {
+                    continue;
+                }
+                if (findNotCommonCount(list.get(i), list.get(j)) == 1) {
+                    return list.get(i) + " " + list.get(j);
+                }
+            }
+            // list.remove(i);
+        }
+        return "no one common";
+    }
+
 
     @Override
     public void solve() {
         ArrayList<String> words = this.readInput();
-        this.getSumTwosThrees(words);
-        for (int i = 0; i < words.size(); i++) {
-            System.out.println(words.get(i));
-        }
-
-        System.out.println("Two's: " + this.sumTwos);
-        System.out.println("Three's: " + this.sumThrees);
-        System.out.println(this.getCheckSum(this.sumTwos, this.sumThrees));
+        System.out.println(this.checkOneCommon(words));
     }
 }
